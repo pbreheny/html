@@ -1,0 +1,86 @@
+print.htmlTable <- function(X,...)
+  {
+    require(xtable)
+    if (identical(X@digits,numeric(0))) digits <- NULL
+    else digits <- drop(matrix(X@digits,ncol=ncol(X@table)+1))
+    display <- xtable(X@table,digits=digits)
+    align(display) <- c("l",rep("r",ncol(X@table)))
+    print(display,type="html",html.table.attributes=paste("class=",X@htmlClass,sep=""),...)
+  }
+print.htmlList <- function(x,file="",append=FALSE,align="center",ncol,nrow)
+  {
+    l <- x@list
+    n <- x@n
+
+    ## Set up nrow, ncol
+    if (missing(nrow) & missing(ncol)){ncol <- 1;nrow <- x@n}
+    if (missing(nrow) & !missing(ncol)){nrow <- x@n %/% ncol + ((x@n %% ncol) != 0)}
+    if (!missing(nrow) & missing(ncol)){ncol <- x@n %/% nrow + ((x@n %% nrow) != 0)}
+
+    ## Print
+    cat("<TABLE class=\"container\">\n",file=file,append=append,sep="")
+    i <- 1
+    ind <- 1
+    repeat
+      {
+        cat("<TR>\n",file=file,append=TRUE,sep="")
+        j <- 1
+        repeat
+          {
+            cat("<TD",file=file,append=TRUE,sep="")
+            if (.hasSlot(l[[ind]],"align")) cat(" align=\"",l[[ind]]@align,"\"",file=file,append=TRUE,sep="")
+            else cat(" align=\"",align,"\"",file=file,append=TRUE,sep="")
+            if (.hasSlot(l[[ind]],"colspan")) cat(" colspan=",l[[ind]]@colspan,file=file,append=TRUE,sep="")
+            cat(">\n",file=file,append=TRUE)
+            print(l[[ind]],file=file,append=TRUE)
+            cat("</TD>\n",file=file,append=TRUE,sep="")
+            if (.hasSlot(l[[ind]],"colspan")) j <- j + l[[ind]]@colspan
+            else j <- j + 1
+            ind <- ind + 1
+            if (j > ncol) break
+            if (ind > length(l)) break
+          }
+        cat("</TR>\n",file=file,append=TRUE,sep="")
+        i <- i+1
+        if (i > nrow) break
+      }
+    cat("</TABLE>\n",file=file,append=TRUE,sep="")
+  }
+print.htmlText <- function(x,file="",append=FALSE)
+  {
+    cat(x@text,"\n",file=file,append=append,sep="")
+  }
+print.htmlCross <- function(obj,file="",append=FALSE,...)
+  {
+    require(xtable)
+    X <- obj@X
+    margins <- obj@margins
+    if (margins)
+      {
+        dn <- dimnames(X)
+        X <- cbind(X,margin.table(X,1))
+        X <- rbind(X,margin.table(X,2))
+        rownames(X)[nrow(X)] <- "Total"
+        colnames(X)[ncol(X)] <- "Total"
+        names(dimnames(X)) <- names(dn)
+      }
+    if (identical(obj@digits,numeric(0))) digits <- NULL
+    else digits <- drop(matrix(obj@digits,ncol=ncol(X)+1))
+    x <- xtable(X,digits=digits)
+    align(x) <- c("l",rep("r",ncol(x)))
+    x <- print(x,type="html",only.contents=TRUE,file="|false",...)
+    ##x <- toHTML.table(X,only.contents=TRUE,file="|false",...)
+    x <- gsub("<TR> <TH>",paste("<TR><TD style=\"vertical-align:middle\"rowspan=\"",length(dimnames(X)[[1]])+1,"\"><b>",names(dimnames(X))[1],"</b></TD> <TH>",sep=""),x)
+    for (i in 1:length(dimnames(X)[[1]]))
+      {
+        x <- gsub(paste("<TR> <TD>",dimnames(X)[[1]][i],"</TD>"),paste("<TR> <TH>",dimnames(X)[[1]][i],"</TD>"),x,fixed=TRUE)
+      }
+    cat("<TABLE class=\"ctable\">\n",file=file,append=append)
+    cat(paste("<TR><TD></TD><TD></TD><TD align=\"center\" colspan=",length(dimnames(X)[[2]]),"><b>",names(dimnames(X))[2],"</b></TD></TR>\n",sep=""),file=file,append=TRUE)
+    cat(x,file=file,append=TRUE)
+    cat("</TABLE>\n",file=file,append=TRUE)
+  }
+print.htmlFig <- function(x,file="",append=FALSE,...)
+  {
+    cat("<a href=\"",x@file,"\">","<img src=\"",x@file,"\" height=",x@height," width=",x@width,">","</a>\n",file=file,append=append,sep="")
+  }
