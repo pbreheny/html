@@ -4,8 +4,10 @@ buildHTML <- function(java=FALSE)
   html.files <- files[grep(".html",files)]
   html.names <- gsub(".html","",html.files)
   for (name in html.names){compileHTML(name,java)}
-  writeLines(.html$style.css, con=paste(.html$dir,"compiled/style.css",sep=""))
-  if (java) writeLines(.html$java.js, con=paste(.html$dir,"compiled/java.js",sep=""))
+  css <- paste(.html$dir,"compiled/style.css",sep="")
+  if (!file.exists(css)) file.copy(paste(.html$src.dir,"style.css",sep=""),css)
+  js <- paste(.html$dir,"compiled/java.js",sep="")
+  if (java & !file.exists(js)) file.copy(paste(.html$src.dir,"java.js",sep=""),css)
 }
 compileHTML <- function(name, java)
 {
@@ -24,7 +26,10 @@ compileHTML <- function(name, java)
   writeLines("</div>",con=f)
   buffer <- readLines(paste(.html$dir,"src/sidebar.html",sep=""))
   writeLines(buffer,con=f)
-  if (java) writeLines(.html$java.html, con=f)
+  if (java) {
+    buffer <- readLines(paste(.html$src.dir,"java.html",sep=""))
+    writeLines(buffer, con=f)
+  }
   writeLines("</body>",con=f)
   writeLines("</html>",con=f)
   close(f)
