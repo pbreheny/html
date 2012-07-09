@@ -24,7 +24,7 @@ htmlList <- function(l)
       }
     return(new("htmlList",list=l,n=n))
   }
-htmlCross <- function(x,margins=TRUE,digits=numeric(0),removeZeros=TRUE,sortTable=ifelse(nrow(X)>2,TRUE,FALSE))
+htmlCross <- function(x, margins=TRUE, digits=numeric(0), removeZeros=TRUE, sortTable={if (nrow(X)>2) TRUE else FALSE})
   {
     ## Add options: removeZeros=FALSE
     X <- as.matrix(x)
