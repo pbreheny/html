@@ -1,2 +1,1 @@
-.html <- list(dir = "html/",
-              src.dir = "/peds/html/inst/")
+.html <- list(dir = "html/")

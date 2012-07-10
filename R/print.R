@@ -32,8 +32,8 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
         cat(" align=\"",l[[ind]]@align,"\"",file=file,append=TRUE,sep="")
       } else cat(" align=\"",align,"\"",file=file,append=TRUE,sep="")
       if (.hasSlot(l[[ind]],"colspan")) cat(" colspan=",l[[ind]]@colspan,file=file,append=TRUE,sep="")
-      cat(">\n",file=file,append=TRUE)
-      print(l[[ind]],file=file,append=TRUE)
+      cat(">\n", file=file, append=TRUE)
+      print(l[[ind]], file=file, append=TRUE)
       cat("</TD>\n",file=file,append=TRUE,sep="")
       if (.hasSlot(l[[ind]],"colspan")) j <- j + l[[ind]]@colspan else j <- j + 1
       ind <- ind + 1
