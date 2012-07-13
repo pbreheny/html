@@ -50,4 +50,15 @@ CIplot.lm <- function(fit, intercept=FALSE, xlab="Regression coefficient", exclu
   return(invisible(B))
 }
 CIplot.glm <- function(obj,...) CIplot.lm(obj,...)
+CIplot.mer <- function(fit, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, n.sim=10000, ...)
+{
+  p <- length(fit@fixef)
+  j <- if (intercept) 1:p else 2:p
+  B <- cbind(fit@fixef[j], confint(fit, j, n.sim=n.sim))
+  if (!missing(tau)) B[,1:3] <- B[,1:3]*tau
+  colnames(B) <- c("Coef","Lower","Upper","p")
+  for (i in seq_along(exclude)) B <- B[-grep(exclude[i],rownames(B)),]
+  if (plot) CIplot(B,xlab=xlab,...)
+  return(invisible(B))
+}
 CIplot <- function(obj,...) UseMethod("CIplot")

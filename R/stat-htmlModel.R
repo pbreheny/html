@@ -5,12 +5,11 @@ htmlModel <- function(fit, plotname="fit", reverse=FALSE, OR=FALSE, exclude=NULL
     tau <- apply(model.matrix(fit), 2, sd)[-1]
     catg <- apply(model.matrix(fit),2,function(x){length(unique(x))})[-1]
     tau[catg==2] <- 1
-    print(tau)
     B <- CIplot(fit, exclude=exclude, plot=FALSE, tau=tau)
   } else B <- CIplot(fit, exclude=exclude, plot=FALSE)
   heightRatio <- .1+nrow(B)/10
   png2(paste("html/compiled/",plotfile,sep=""),height=6*heightRatio,width=6)
-  CIplot(B,xlab="Regression coefficient")
+  CIplot(B, xlab="Regression coefficient")
   dev.off()
   if (OR) {
     colnames(B)[1] <- "OR"
