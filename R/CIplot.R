@@ -1,5 +1,6 @@
-CIplot.matrix <- function(B, labels=rownames(B), pxlim, xlim, ylim, sub, diff=(ncol(B)==4), n.ticks=6, mar=c(5,nn/3+.5,2,4), axis=TRUE, trans, p.label=FALSE, ...)
+CIplot.matrix <- function(obj, labels=rownames(B), pxlim, xlim, ylim, sub, diff=(ncol(B)==4), n.ticks=6, mar=c(5,nn/3+.5,2,4), axis=TRUE, trans, p.label=FALSE, ...)
 {
+  B <- obj
   nn <- max(nchar(rownames(B)))
   par(mar=mar)
   n <- nrow(B)
@@ -36,8 +37,9 @@ CIplot.matrix <- function(B, labels=rownames(B), pxlim, xlim, ylim, sub, diff=(n
   text(x=par("usr")[1],adj=1,y=n:1,labels=labels,xpd=TRUE,cex=.8)
   return(invisible(B))
 }
-CIplot.lm <- function(fit, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, ...)
+CIplot.lm <- function(obj, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, ...)
 {
+  fit <- obj
   p <- length(coef(fit))
   j <- if (intercept) 1:p else 2:p
   if (missing(tau)) tau <- 1
@@ -50,8 +52,9 @@ CIplot.lm <- function(fit, intercept=FALSE, xlab="Regression coefficient", exclu
   return(invisible(B))
 }
 CIplot.glm <- function(obj,...) CIplot.lm(obj,...)
-CIplot.mer <- function(fit, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, n.sim=10000, ...)
+CIplot.mer <- function(obj, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, n.sim=10000, ...)
 {
+  fit <- obj
   p <- length(fit@fixef)
   j <- if (intercept) 1:p else 2:p
   B <- cbind(fit@fixef[j], confint(fit, j, n.sim=n.sim))

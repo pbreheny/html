@@ -47,11 +47,11 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
   cat("</TABLE>\n", file=file, append=TRUE, sep="")
 }
 
-print.htmlText <- function(x, name, file="", append=FALSE)
-  {
+print.htmlText <- function(x, name, file="", append=FALSE, ...)
+{
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
   cat(x@text, "\n", file=file, append=append, sep="")
-  }
+}
 
 print.htmlCross <- function(obj, name, file="", append=FALSE,...) {
   require(xtable)
@@ -66,19 +66,17 @@ print.htmlCross <- function(obj, name, file="", append=FALSE,...) {
     colnames(X)[ncol(X)] <- "Total"
     names(dimnames(X)) <- names(dn)
   }
-  if (identical(obj@digits,numeric(0))) digits <- NULL
-  else digits <- drop(matrix(obj@digits,ncol=ncol(X)+1))
+  digits <- if (identical(obj@digits,numeric(0))) NULL else drop(matrix(obj@digits,ncol=ncol(X)+1))
   x <- xtable(X,digits=digits)
   align(x) <- c("l",rep("r",ncol(x)))
-  x <- print(x,type="html",only.contents=TRUE,file="|false",...)
-  ##x <- toHTML.table(X,only.contents=TRUE,file="|false",...)
-  x <- gsub("<TR> <TH>",paste("<TR><TD style=\"vertical-align:middle\"rowspan=\"",length(dimnames(X)[[1]])+1,"\"><b>",names(dimnames(X))[1],"</b></TD> <TH>",sep=""),x)
+  x <- print(x, type="html", only.contents=TRUE, file=tempfile(), ...)
+  x <- gsub("<TR> <TH>", paste("<TR><TD style=\"vertical-align:middle\"rowspan=\"", length(dimnames(X)[[1]])+1, "\"><b>", names(dimnames(X))[1], "</b></TD> <TH>", sep=""),x)
   for (i in 1:length(dimnames(X)[[1]])) {
-    x <- gsub(paste("<TR> <TD>",dimnames(X)[[1]][i],"</TD>"),paste("<TR> <TH>",dimnames(X)[[1]][i],"</TD>"),x,fixed=TRUE)
+    x <- gsub(paste("<TR> <TD>", dimnames(X)[[1]][i],"</TD>"), paste("<TR> <TH>",dimnames(X)[[1]][i],"</TD>"),x,fixed=TRUE)
   }
-  cat("<TABLE class=\"ctable\">\n",file=file,append=append)
-  cat(paste("<TR><TD></TD><TD></TD><TD align=\"center\" colspan=",length(dimnames(X)[[2]]),"><b>",names(dimnames(X))[2],"</b></TD></TR>\n",sep=""),file=file,append=TRUE)
-  cat(x,file=file,append=TRUE)
+  cat("<TABLE class=\"ctable\">\n", file=file, append=append)
+  cat(paste("<TR><TD></TD><TD></TD><TD align=\"center\" colspan=", length(dimnames(X)[[2]]), "><b>", names(dimnames(X))[2],"</b></TD></TR>\n",sep=""), file=file, append=TRUE)
+  cat(x, file=file, append=TRUE)
   cat("</TABLE>\n", file=file, append=TRUE)
 }
 

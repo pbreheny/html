@@ -1,5 +1,5 @@
 ## Logistic regression vs. a continuous predictor
-lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=paste("Pr(",y,")",sep=""), tau=signif(sd(xxx),1), log.x=FALSE)
+lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=paste("Pr(",y,")",sep=""), tau=signif(sd(xxx),1), log.x=FALSE, add.mean=FALSE)
 {
   require(visreg)
   if (!missing(data)) {
@@ -14,12 +14,18 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
     xx <- log(xx)
     x <- paste("Log(",x,")",sep="")
   }
-  
+
   ## Create boxplot .png
   boxfile <- paste(plotname,"-box.png",sep="")
   png2(paste("html/compiled/",boxfile,sep=""))
   par(las=1)
-  boxplot(xx~yy, horizontal=TRUE, pch=19, col="gray90", boxwex=0.5, lwd=0.7, xlab=x, ylab=y)
+  b <- boxplot(xx~yy, plot=FALSE)
+  bx <- bxp(b, horizontal=TRUE, pch=19, boxfill="gray90", boxwex=0.5, lwd=0.7, xlab=x, ylab=y)
+  if (add.mean) {
+    m <- by(xx,yy,mean)
+    points(m, bx, pch="+")
+  }
+  
   ##trellis.par.set(box.rectangle=list(fill="gray90"))
   ##print(bwplot(yy~xx,ylab=y,xlab=x))
   dev.off()
@@ -33,7 +39,7 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
   xxx <- xx[ind]
   yyy <- yy[ind]
   n.missing <- length(xx)-length(xxx)
-  if (n.missing > 0) L[[1]] <- htmlText(paste("Missing:",sum(n.missing)))
+  if (n.missing > 0) L[[1]] <- htmlText(paste("Observed:", length(xxx), "<br>\nMissing:", n.missing, "<br>\n"))
   fit <- glm(yyy~xxx,family=binomial)
   fit0 <- glm(yyy~1,family=binomial)
   L[[2]] <- htmlText(paste("Odds ratio for<br>difference of ",tau," units",sep=""))

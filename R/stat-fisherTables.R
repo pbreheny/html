@@ -28,8 +28,9 @@ fisherTables <- function(x, y, Data, reverse=FALSE, sortTable={if (nrow(tab)>2) 
   R[[6]] <- R[[8]] <- htmlText("")
   if (n.missing > 0) R[[6]] <- htmlText(paste("Missing:",sum(n.missing)))
   tab <- tab[apply(tab,1,sum)>0,]
-  exit.status <- try(fit <- fisher.test(tab),silent=TRUE)
-  if (class(exit.status)=="try-error") fit <- fisher.test(tab,simulate.p.value=TRUE,B=25000)
+  fit <- if (prod(dim(tab)) <= 25) fisher.test(tab) else {
+    fisher.test(tab,simulate.p.value=TRUE,B=10000)
+  }
   if (is.null(fit$estimate)) {
     R[[5]] <- htmlText("Test for association")
     R[[7]] <- htmlText(formatP(fit$p.value,label=TRUE))
