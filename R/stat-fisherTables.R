@@ -42,6 +42,13 @@ fisherTables <- function(x, y, Data, reverse=FALSE, sortTable={if (nrow(tab)>2) 
     R[[7]][1,2:3] <- fit$conf.int
     R[[7]][1,4] <- fit$p.value
     if (reverse) R[[7]][1:3] <- 1/R[[7]][c(1,3,2)]
+    l <- R[[7]]
+    if (!exists(".B", envir=.GlobalEnv)) {
+      assign(".B", l, envir=.GlobalEnv)
+    } else {
+      B <- get(".B", envir=.GlobalEnv)
+      assign(".B", rbind(B,l), envir=.GlobalEnv)
+    }
     x <- R[[7]][1,]
     for (j in 1:3) R[[7]][1,j] <- formatC(x[j],ifelse(x[j]>1,1,2),format="f")
     R[[7]][,4] <- formatP(x[4])

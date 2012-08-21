@@ -49,6 +49,12 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
   if (reverse) L[[4]][1:3] <- 1/L[[4]][c(1,3,2)]
   L[[4]][4] <- anova(fit0,fit,test="Chisq")[2,5]
   l <- L[[4]]
+  if (!exists(".B", envir=.GlobalEnv)) {
+    assign(".B", l, envir=.GlobalEnv)
+  } else {
+    B <- get(".B", envir=.GlobalEnv)
+    assign(".B", rbind(B,l), envir=.GlobalEnv)
+  }
   for (j in 1:3) L[[4]][j] <- formatC(l[j],ifelse(l[j]>1,1,2),format="f")
   L[[4]][4] <- formatP(l[4])
   L[[4]] <- htmlTable(L[[4]])
