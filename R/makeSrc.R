@@ -1,10 +1,10 @@
-makeSrc <- function(title, author)
+makeSrc <- function(title, desc)
 {
   ## Header
   filename <- paste(.html$dir,"src/header.html",sep="")
   cat("<div id=\"header\">\n", file=filename)
   cat("  <h1>", title, "</h1>\n", file=filename, append=TRUE, sep="")
-  cat("  <p id=\"description\">By ",author, ", ", as.character(Sys.Date()),"</p>\n", file=filename, append=TRUE, sep="")
+  cat("  <p id=\"description\">", desc, as.character(Sys.Date()),"</p>\n", file=filename, append=TRUE, sep="")
   cat("</div>\n", file=filename, append=TRUE)
   
   ## Head
