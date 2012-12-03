@@ -6,36 +6,36 @@ CIplot.matrix <- function(obj, labels=rownames(B), pxlim, xlim, ylim, sub, diff=
   n <- nrow(B)
   if (!missing(trans)) B[,1:3] <- trans(B[,1:3])
   
-  if (missing(pxlim))
-  {
-    if (missing(xlim)) pxlim <- pretty(range(B[,2:3]),n=n.ticks-1)
-    else pxlim <- pretty(xlim,n=n.ticks-1)
+  if (missing(pxlim)) {
+    pxlim <- if (missing(xlim)) pretty(range(B[,2:3], na.rm=TRUE),n=n.ticks-1) else pretty(xlim, n=n.ticks-1)
   }
   if (missing(ylim)) ylim <- c(0.5,n+0.5)
   
   plot(B[n:1,1],1:n,xlim = range(pxlim), ylim=ylim, ylab="", axes=FALSE,pch=19,...)
-  for (i in 1:n)
-  {
+  for (i in 1:n) {
     lines(c(B[i,2:3]),c(n-i+1,n-i+1),lwd=2)
-    if (diff)
-    {
-      p <- formatP(B[,4],label=p.label)
+    if (diff) {
+      p <- formatP(B[,4], label=p.label)
+      p[is.na(B[,4])] <- ""
       mtext(at=n-i+1,p[i],line=1,side=4,las=1,cex=0.7,adj=0)
     }
-    ##if (nchar(p)==6) p <- paste(p,"  ")
-    ##if (nchar(p)==7) p <- paste(p," ")
-    ##if (diff) mtext(at=n-i+1,p,line=1,side=4,las=1,cex=0.7,adj=.5)
   }
   if (axis) axis(1, pxlim)
-  if (diff)
-  {
+  if (diff) {
     null <- 0
     if (!missing(trans)) null <- trans(0)
     abline(v=null,col="gray")
   }
   if (!missing(sub)) mtext(sub,3,0,cex=0.8)
-  text(x=par("usr")[1],adj=1,y=n:1,labels=labels,xpd=TRUE,cex=.8)
-  return(invisible(B))
+  
+  ind <- !is.na(B[,1])
+  text(x=par("usr")[1], adj=1, y=(n:1)[ind], labels=labels[ind], xpd=TRUE, cex=.8)
+  if (sum(!ind) > 0) {
+    a <- diff(par("usr")[1:2])/diff(par("plt")[1:2])
+    b <- par("usr")[1] - a*par("plt")[1]
+    text(x=b+a*.01, adj=0, y=(n:1)[!ind], labels=labels[!ind], xpd=TRUE, cex=.8)    
+  }
+  invisible(B)
 }
 CIplot.lm <- function(obj, intercept=FALSE, xlab="Regression coefficient", exclude=NULL, plot=TRUE, tau, ...)
 {
