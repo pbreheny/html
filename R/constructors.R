@@ -6,14 +6,14 @@ htmlText <- function(text,align="center",colspan=1,bold=FALSE)
                align=align,
                colspan=colspan))
   }
-htmlTable <- function(X,digits=numeric(0),class="ctable")
-  {
-    if (is.matrix(digits)) digits <- as.numeric(digits)
-    return(new("htmlTable",
-               table=as.data.frame(X),
-               digits=digits,
-               htmlClass=class))
-  }
+htmlTable <- function(X,digits=numeric(0),class="ctable") {
+  if (is.matrix(digits)) digits <- as.numeric(digits)
+  if (is.table(X) & (length(dim(X))==2)) class(X) <- "matrix"
+  return(new("htmlTable",
+             table=as.data.frame(X),
+             digits=digits,
+             htmlClass=class))
+}
 htmlList <- function(l)
   {
     n <- 0
