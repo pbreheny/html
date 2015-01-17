@@ -1,9 +1,13 @@
 print.htmlTable <- function(X, name, file="", ...) {
   require(xtable)
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
-  if (identical(X@digits,numeric(0))) {
+  if (identical(X@digits, numeric(0))) {
     digits <- NULL
-  } else digits <- drop(matrix(X@digits,ncol=ncol(X@table)+1))
+  } else if (length(X@digits)==1) {
+    digits <- c(0, rep(X@digits, ncol(X@table)))
+  } else {
+    digits <- drop(matrix(c(0, X@digits), ncol=ncol(X@table)+1))
+  }
   display <- xtable(X@table,digits=digits)
   align(display) <- c("l",rep("r",ncol(X@table)))
   print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""), file=file, ...)

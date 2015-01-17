@@ -10,8 +10,7 @@ htmlModelInt <- function(fBase,x1,x2,...)
   val
 }
 
-htmlModelIntCat <- function(fBase,x1,x2,plotname="fit",reverse=FALSE,OR=FALSE,lab)
-  {
+htmlModelIntCat <- function(fBase,x1,x2,plotname="fit",reverse=FALSE, OR=FALSE, sort=FALSE, lab) {
     xx1 <- factor(x1,levels=rev(levels(x1)))
     xx2 <- factor(x2,levels=rev(levels(x2)))
     cBase <- cBase1 <- cBase2 <- cBase3 <- cBase4 <- as.character(fBase)
@@ -19,6 +18,7 @@ htmlModelIntCat <- function(fBase,x1,x2,plotname="fit",reverse=FALSE,OR=FALSE,la
     cBase2[3] <- paste(cBase2[3],"+ x1*xx2")
     cBase3[3] <- paste(cBase3[3],"+ xx1*x2")
     cBase4[3] <- paste(cBase4[3],"+ xx1*xx2")
+    cat(cBase)
     f1 <- as.formula(paste(cBase1[2],cBase1[1],cBase1[3]))
     f2 <- as.formula(paste(cBase2[2],cBase2[1],cBase2[3]))
     f3 <- as.formula(paste(cBase3[2],cBase3[1],cBase3[3]))
@@ -39,8 +39,8 @@ htmlModelIntCat <- function(fBase,x1,x2,plotname="fit",reverse=FALSE,OR=FALSE,la
     if (!missing(lab)) rownames(B) <- lab
     plotfile <- paste(plotname,".png",sep="")
     heightRatio <- .1+5/10
-    png2(paste("html/compiled/",plotfile,sep=""),height=6*heightRatio,width=6)
-    CIplot(B,xlab="Difference (log odds)")
+    png(paste("html/compiled/",plotfile,sep=""), height=6*heightRatio, width=6, units="in", res=200)
+    CIplot(B, xlab="Difference (log odds)", sort=sort)
     dev.off()
     B[,1:3] <- exp(B[,1:3])
     L <- vector("list",2)
@@ -52,7 +52,7 @@ htmlModelIntCat <- function(fBase,x1,x2,plotname="fit",reverse=FALSE,OR=FALSE,la
   }
 
 ## x1 numeric, x2 factor
-htmlModelIntContCat <- function(fBase,x1,x2,ref=quantile(x1,p=c(.25,.75)),plotname="fit",reverse=FALSE,OR=FALSE,lab)
+htmlModelIntContCat <- function(fBase,x1,x2,ref=quantile(x1,p=c(.25,.75)),plotname="fit",reverse=FALSE, OR=FALSE, sort=FALSE, lab)
   {
     x11 <- x1-ref[1]
     x12 <- x1-ref[2]
@@ -73,8 +73,8 @@ htmlModelIntContCat <- function(fBase,x1,x2,ref=quantile(x1,p=c(.25,.75)),plotna
     if (!missing(lab)) rownames(B) <- lab
     plotfile <- paste(plotname,".png",sep="")
     heightRatio <- .1+5/10
-    png2(paste("html/compiled/",plotfile,sep=""),height=6*heightRatio,width=6)
-    CIplot(B,xlab="Difference (log odds)")
+    png(paste("html/compiled/",plotfile,sep=""), height=6*heightRatio, width=6, units="in", res=200)
+    CIplot(B, xlab="Difference (log odds)", sort=sort)
     dev.off()
     B[,1:3] <- exp(B[,1:3])
     L <- vector("list",2)

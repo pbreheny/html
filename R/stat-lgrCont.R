@@ -17,7 +17,7 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
 
   ## Create boxplot .png
   boxfile <- paste(plotname,"-box.png",sep="")
-  png2(paste("html/compiled/",boxfile,sep=""))
+  png(paste("html/compiled/", boxfile, sep=""), 7, 7, units="in", res=200)
   par(las=1)
   b <- boxplot(xx~yy, plot=FALSE)
   bx <- bxp(b, horizontal=TRUE, pch=19, boxfill="gray90", boxwex=0.5, lwd=0.7, xlab=x, ylab=y)
@@ -62,8 +62,8 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
   
   ## Create visreg .png
   visfile <- paste(plotname,"-vis.png",sep="")
-  png2(paste("html/compiled/",visfile,sep=""))
-  visreg(fit,xlab=xlab.vis,ylab=ylab.vis,partial=FALSE,scale="response")
+  png(paste("html/compiled/",visfile,sep=""), 7, 7, "in", res=200)
+  visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=FALSE, scale="response", rug=2)
   dev.off()
   L[[6]] <- htmlFig(visfile)
   return(htmlList(L))
