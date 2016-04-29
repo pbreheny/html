@@ -1,0 +1,12 @@
+<div id="sr_js"></div>
+<script type="text/javascript">
+  (function () {
+  var sr_script_tag = document.getElementById("sr_js");         
+  if (sr_script_tag) {
+  var scriptStyles = document.createElement("script");
+  scriptStyles.type = "text/javascript";
+  scriptStyles.src = 'java.js';
+  sr_script_tag.appendChild(scriptStyles);
+  }
+  }());
+</script>

@@ -1,1 +1,1 @@
-.html <- list(dir = "html/")
+.html <- list(dir = "web/")
