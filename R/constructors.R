@@ -32,6 +32,6 @@ htmlCross <- function(x, margins=TRUE, digits=numeric(0), removeZeros=TRUE, sort
     if (sortTable) X <- X[order(apply(X,1,sum),decreasing=TRUE),]
     return(new("htmlCross",X=X,margins=margins,digits=digits))
 }
-htmlFig <- function(x, width=480, height=480, ) {
+htmlFig <- function(x, width=480, height=480) {
     return(new("htmlFig",file=x, width=width, height=height))
 }
