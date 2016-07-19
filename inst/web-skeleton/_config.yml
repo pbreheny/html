@@ -1,0 +1,6 @@
+# Site settings
+title: TITLE OF PROJECT
+
+# Build settings
+markdown: kramdown
+exclude: [build]

@@ -1,0 +1,87 @@
+body{
+  margin:0px;
+  padding:0px;
+  background:#fff;
+  color:#000000;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+}
+
+#header{
+  padding-left: 200px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: #0069B3;
+  color: #cccccc;
+  font-size: 32px;
+}
+
+#description{
+  padding-left: 250px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #0069B3;
+  background: #cccccc;
+}
+
+#sideBar{
+  position:fixed;
+  padding-left: 20px;
+  width: 200px;
+}
+
+#mainClm{
+  margin-left: 200px;
+}
+
+#sideBar ul{
+    margin:0px 0px 0px 0px;
+    padding:0px;
+    list-style-type:none;
+    font-size:95%;
+}
+#sideBar li{
+    margin:0px 0px 0px 10px;
+    padding:0px 0px 0px 0px;
+    list-style-type:none;
+    font-size:95%;
+}
+#sideBar li a{
+    margin:0px 0px 0px 10px;
+    width:100%;
+    border:none;
+    color:#999999;
+    text-decoration:none;
+}
+#sideBar li a:link{color:black;}
+#sideBar li a:visited{color:black;}
+#sideBar li a:hover{color:#0069B3;text-decoration:none;}
+
+h2{
+  color:#0069B3;
+  font-weight:bold;
+  font-family:Verdana,Sans-Serif;
+  letter-spacing:-1px;
+}
+h3{margin:20px 0px 10px 0px;color:#777777;font-size:105%;}
+
+a{color:#777777;text-decoration:none;}
+
+a:hover{color:#0069B3;}
+
+.container, .container tr, .container td{vertical-align:top;font-size:100%;padding-left:10px;padding-right:10px;}
+
+.ctable, .ctable td, .ctable th{
+  font-family:"Trebuchet MS",Trebuchet,Verdana,Sans-Serif;
+  font-size:12px;
+  border-collapse:collapse;
+  border-spacing:0;
+  padding:2px;
+  margin: 20px;
+}
+.ctable{border:1px solid #000000;margin-bottom:20px}
+.ctable td{border:1px dotted #E5E5E5;}
+.ctable th{background-color:#ddd;padding-left:4px;padding-right:4px}
+
+.print_only,.hidden{display:none;}
+

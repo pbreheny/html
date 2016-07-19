@@ -1,6 +1,6 @@
 ## Linear regression vs. a continuous predictor (simple linear regression)
-lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y, tau=signif(sd(xxx),1), log.x=FALSE, add.mean=FALSE)
-{
+lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y, tau=signif(sd(xxx),1),
+                   log.x=FALSE, add.mean=FALSE) {
   require(visreg)
   if (!missing(data)) {
     xx <- data[,x]
@@ -20,7 +20,7 @@ lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y
   ind <- is.finite(xx)
   xxx <- xx[ind]
   yyy <- yy[ind]
-  
+
   L <- vector("list", 4)
   n.missing <- length(xx)-length(xxx)
   if (n.missing > 0) {
@@ -28,7 +28,7 @@ lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y
   } else {
     L[[1]] <- htmlText("")
   }
-  
+
   fit <- cor.test(xxx, yyy)
   Tab <- c(fit$estimate, fit$conf.int, fit$p.value)
   Tab <- c(formatC(Tab[1:3], 2, format="f"),
@@ -53,10 +53,10 @@ lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y
   L[[4]][4] <- formatP(l[4])
   L[[4]] <- htmlTable(L[[4]])
   .pvalues <<- as.numeric(if (exists(".pvalues")) append(.pvalues, l[4]) else l[4])
-  
+
   ## Create visreg .png
-  visfile <- paste(plotname,"-vis.png",sep="")
-  png(paste("html/compiled/",visfile,sep=""), 7, 7, "in", res=200)
+  visfile <- paste0(.html$img, plotname,"-vis.png")
+  png(paste0(.html$dir, visfile), 7, 7, "in", res=200)
   visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=TRUE)
   dev.off()
   L[[5]] <- htmlFig(visfile)

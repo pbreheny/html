@@ -17,12 +17,12 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
   l <- x@list
   n <- x@n
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
-  
+
   ## Set up nrow, ncol
   if (missing(nrow) & missing(ncol)){ncol <- 1;nrow <- x@n}
   if (missing(nrow) & !missing(ncol)){nrow <- x@n %/% ncol + ((x@n %% ncol) != 0)}
   if (!missing(nrow) & missing(ncol)){ncol <- x@n %/% nrow + ((x@n %% nrow) != 0)}
-  
+
   ## Print
   cat("<TABLE class=\"container\">\n",file=file,append=append,sep="")
   i <- 1
@@ -51,8 +51,7 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
   cat("</TABLE>\n", file=file, append=TRUE, sep="")
 }
 
-print.htmlText <- function(x, name, file="", append=FALSE, ...)
-{
+print.htmlText <- function(x, name, file="", append=FALSE, ...) {
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
   cat(x@text, "\n", file=file, append=append, sep="")
 }

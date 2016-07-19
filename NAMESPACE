@@ -1,6 +1,7 @@
 export(as.htmlList, buildHTML, clearHTML, compileHTML, fisherTables,
        htmlANOVA, htmlc, htmlCross, htmlFig, htmlList, htmlModel,
        htmlModelInt, htmlModelIntCat, htmlModelIntContCat, htmlTable,
-       htmlText, lgrCont, lmCont, makeSidebar, contSummary, makeSrc)
+       htmlText, lgrCont, lmCont, makeSidebar, contSummary, makeSrc,
+       webSkeleton, htmlOpt)
 exportMethods(print)
 exportClasses(htmlCross, htmlFig, htmlList, htmlTable, htmlText)
