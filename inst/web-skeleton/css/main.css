@@ -24,12 +24,12 @@ body{
   background: #cccccc;
 }
 
-#mainClm{
-  margin-left: 200px;
+#content{
+  margin-left: 220px;
 }
 
 #sideBar{
-  position:fixed;
+  position: absolute;
   padding-left: 20px;
   width: 200px;
 }
