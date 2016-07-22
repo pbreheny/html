@@ -31,6 +31,7 @@ body{
 #sideBar{
   position: absolute;
   padding-left: 20px;
+  padding-bottom: 50px;
   width: 200px;
 }
 
