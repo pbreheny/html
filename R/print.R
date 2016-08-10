@@ -1,4 +1,4 @@
-print.htmlTable <- function(X, name, file="", ...) {
+print.htmlTable <- function(X, name, file="", append=FALSE, ...) {
   require(xtable)
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
   if (identical(X@digits, numeric(0))) {
@@ -10,7 +10,12 @@ print.htmlTable <- function(X, name, file="", ...) {
   }
   display <- xtable(X@table,digits=digits)
   align(display) <- c("l",rep("r",ncol(X@table)))
-  print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""), file=file, ...)
+  if (!append) {
+    cat("---\nlayout: default\n---\n", file=file)
+    append <- TRUE
+  }
+  print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""),
+        file=file, append=append, ...)
 }
 
 print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol, nrow) {
@@ -24,14 +29,18 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
   if (!missing(nrow) & missing(ncol)){ncol <- x@n %/% nrow + ((x@n %% nrow) != 0)}
 
   ## Print
-  cat("<TABLE class=\"container\">\n",file=file,append=append,sep="")
+  if (!append) {
+    cat("---\nlayout: default\n---\n", file=file)
+    append <- TRUE
+  }
+  cat("<TABLE class=\"container\">\n", file=file, append=append, sep="")
   i <- 1
   ind <- 1
   repeat {
-    cat("<TR>\n",file=file,append=TRUE,sep="")
+    cat("<TR>\n", file=file, append=TRUE, sep="")
     j <- 1
     repeat {
-      cat("<TD",file=file,append=TRUE,sep="")
+      cat("<TD", file=file, append=TRUE, sep="")
       if (.hasSlot(l[[ind]],"align")) {
         cat(" align=\"",l[[ind]]@align,"\"",file=file,append=TRUE,sep="")
       } else cat(" align=\"", align,"\"",file=file,append=TRUE,sep="")
@@ -53,6 +62,10 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
 
 print.htmlText <- function(x, name, file="", append=FALSE, ...) {
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
+  if (!append) {
+    cat("---\nlayout: default\n---\n", file=file)
+    append <- TRUE
+  }
   cat(x@text, "\n", file=file, append=append, sep="")
 }
 
@@ -77,6 +90,10 @@ print.htmlCross <- function(obj, name, file="", append=FALSE,...) {
   for (i in 1:length(dimnames(X)[[1]])) {
     x <- gsub(paste("<TR> <TD>", dimnames(X)[[1]][i],"</TD>"), paste("<TR> <TH>",dimnames(X)[[1]][i],"</TD>"),x,fixed=TRUE)
   }
+  if (!append) {
+    cat("---\nlayout: default\n---\n", file=file)
+    append <- TRUE
+  }
   cat("<TABLE class=\"ctable\">\n", file=file, append=append)
   cat(paste("<TR><TD></TD><TD></TD><TD align=\"center\" colspan=", length(dimnames(X)[[2]]), "><b>", names(dimnames(X))[2],"</b></TD></TR>\n",sep=""), file=file, append=TRUE)
   cat(x, file=file, append=TRUE)
@@ -85,5 +102,9 @@ print.htmlCross <- function(obj, name, file="", append=FALSE,...) {
 
 print.htmlFig <- function(x, name, file="", append=FALSE, ...) {
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
+  if (!append) {
+    cat("---\nlayout: default\n---\n", file=file)
+    append <- TRUE
+  }
   cat("<a href=\"",x@file,"\">","<img src=\"",x@file,"\" height=",x@height," width=",x@width,">","</a>\n", file=file, append=append, sep="")
 }

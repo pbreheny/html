@@ -1,6 +1,6 @@
 # Site settings
 title: TITLE OF PROJECT
+author: YOUR NAME
 
 # Build settings
 markdown: kramdown
-exclude: [build]
