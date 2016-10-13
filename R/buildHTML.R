@@ -6,7 +6,7 @@ buildHTML <- function(java=FALSE) {
   css <- paste(.html$dir,"compiled/style.css",sep="")
   if (!file.exists(css)) file.copy(system.file("style.css", package="html"), css)
   js <- paste(.html$dir,"compiled/java.js",sep="")
-  if (java & !file.exists(js)) file.copy(system.file("java.js", package="html"), js)
+  if (java & !file.exists(js)) file.copy(system.file("web-skeleton/js/jquery.js", package="html"), js)
   invisible(NULL)
 }
 compileHTML <- function(name, java) {
@@ -26,7 +26,7 @@ compileHTML <- function(name, java) {
   buffer <- readLines(in.file)
   writeLines(buffer, con=f)
   if (java) {
-    buffer <- readLines(system.file("java.html", package="html"))
+    buffer <- readLines(system.file("web-skeleton/_includes/java.html", package="html"))
     writeLines(buffer, con=f)
   }
   writeLines("</body>",con=f)
