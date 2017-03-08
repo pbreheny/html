@@ -1,0 +1,5 @@
+*.html
+!index.html
+!_includes/*.html
+!_layouts/*.html
+!css/*.css
