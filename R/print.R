@@ -18,7 +18,7 @@ print.htmlTable <- function(X, name, file="", append=FALSE, ...) {
         file=file, append=append, ...)
 }
 
-print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol, nrow) {
+print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol, nrow, ...) {
   l <- x@list
   n <- x@n
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
@@ -46,7 +46,7 @@ print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol,
       } else cat(" align=\"", align,"\"",file=file,append=TRUE,sep="")
       if (.hasSlot(l[[ind]],"colspan")) cat(" colspan=",l[[ind]]@colspan,file=file,append=TRUE,sep="")
       cat(">\n", file=file, append=TRUE)
-      print(l[[ind]], file=file, append=TRUE)
+      print(l[[ind]], file=file, append=TRUE, ...)
       cat("</TD>\n",file=file,append=TRUE,sep="")
       if (.hasSlot(l[[ind]],"colspan")) j <- j + l[[ind]]@colspan else j <- j + 1
       ind <- ind + 1
