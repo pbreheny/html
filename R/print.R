@@ -1,4 +1,4 @@
-print.htmlTable <- function(X, name, file="", append=FALSE, ...) {
+print.htmlTable <- function(X, name, file="", append=FALSE, include.rownames=TRUE, ...) {
   require(xtable)
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
   if (identical(X@digits, numeric(0))) {
@@ -14,8 +14,12 @@ print.htmlTable <- function(X, name, file="", append=FALSE, ...) {
     cat("---\nlayout: default\n---\n", file=file)
     append <- TRUE
   }
+  if (missing(include.rownames) & class(X@table)[1] == "data.table") {
+    include.rownames <- FALSE
+    align(display)[2] <- 'l'
+  }
   print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""),
-        file=file, append=append, ...)
+        file=file, append=append, include.rownames=include.rownames, ...)
 }
 
 print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol, nrow, ...) {

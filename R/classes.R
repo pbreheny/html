@@ -1,7 +1,7 @@
 setClass("htmlText", representation(text="character",
                                    align="character",
                                    colspan="numeric"))
-setClass("htmlTable", representation(table="data.frame",
+setClass("htmlTable", representation(table="ANY",
                                      digits="numeric",
                                      htmlClass="character",
                                      colspan="numeric"))

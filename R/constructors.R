@@ -8,8 +8,9 @@ htmlText <- function(text, align="center", colspan=1, bold=FALSE) {
 htmlTable <- function(X, digits=numeric(0), class="ctable", colspan=1) {
   if (is.matrix(digits)) digits <- as.numeric(digits)
   if (is.table(X) & (length(dim(X))==2)) class(X) <- "matrix"
+  if (class(X)[1] != "data.table") X <- as.data.frame(X)
   return(new("htmlTable",
-             table=as.data.frame(X),
+             table=X,
              digits=digits,
              colspan=colspan,
              htmlClass=class))
