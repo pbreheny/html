@@ -10,7 +10,7 @@ body{
 header {
   width: 100%;
   border-bottom: 1px solid #e8e8e8;
-  min-height: 56px;
+  height: 60x;
   position: fixed;
   display: block;
   top: 0;
@@ -47,7 +47,7 @@ header {
   max-width: 1200px;
   margin-right: auto;
   margin-left: auto;
-  margin-top: 100px;
+  margin-top: 60px;
 }
 #wrapper:after {
   content: "";
@@ -57,6 +57,7 @@ header {
 
 #content{
   margin-left: 200px;
+  padding-top: 40px;
 }
 
 .content-title{
@@ -69,6 +70,8 @@ header {
   position: fixed!important;
   z-index:1;
   width: 200px;
+  height: 100%;
+  padding-top: 40px;
 }
 #sideBar ul{
     margin:0px 0px 0px 0px;
