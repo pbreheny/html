@@ -35,3 +35,17 @@ htmlCross <- function(x, margins=TRUE, digits=numeric(0), removeZeros=TRUE, sort
 htmlFig <- function(x, width=480, height=480, colspan=1) {
   return(new("htmlFig", file=x, width=width, height=height, colspan=colspan))
 }
+htmlDownload <- function(link, text="Full results") {
+  txt <- paste0('<a href="', link, '" download="">
+  <div class="download">
+    <svg-icon>
+      <src href="img/sprite.svg#si-glyph-inbox-download"/>
+    </svg-icon>
+    Full results
+  </div>
+</a>')
+  htmlText(txt)
+}
+htmlTitle <- function(title) {
+  htmlText(paste0("<span class='content-title'>", title, "</span"))
+}
