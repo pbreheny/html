@@ -46,6 +46,6 @@ htmlDownload <- function(link, text="Full results") {
 </a>')
   htmlText(txt)
 }
-htmlTitle <- function(title) {
-  htmlText(paste0("<span class='content-title'>", title, "</span>"))
+htmlTitle <- function(title, ...) {
+  htmlText(paste0("<span class='content-title'>", title, "</span>"), ...)
 }
