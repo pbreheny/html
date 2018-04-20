@@ -1,4 +1,5 @@
 lftp <- function() {
+  stop("lftp should be updated!")
   seed <- rstring()
 
   # sync

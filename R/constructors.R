@@ -49,3 +49,7 @@ htmlDownload <- function(link, text="Full results") {
 htmlTitle <- function(title, ...) {
   htmlText(paste0("<span class='content-title'>", title, "</span>"), ...)
 }
+htmlFrame <- function(x, colspan=1) {
+  txt <- paste0('<iframe width=100% src="', x, '"></iframe>')
+  htmlText(txt, colspan=colspan)
+}
