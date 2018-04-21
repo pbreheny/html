@@ -3,6 +3,7 @@ setClass("htmlText", representation(text="character",
                                    colspan="numeric"))
 setClass("htmlTable", representation(table="ANY",
                                      digits="numeric",
+                                     align="character",
                                      htmlClass="character",
                                      colspan="numeric"))
 setClass("htmlFig", representation(file="character",

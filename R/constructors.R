@@ -5,13 +5,15 @@ htmlText <- function(text, align="center", colspan=1, bold=FALSE) {
              align=align,
              colspan=colspan))
 }
-htmlTable <- function(X, digits=numeric(0), class="ctable", colspan=1) {
+htmlTable <- function(X, digits=numeric(0), align, class="ctable", colspan=1) {
   if (is.matrix(digits)) digits <- as.numeric(digits)
   if (is.table(X) & (length(dim(X))==2)) class(X) <- "matrix"
   if (class(X)[1] != "data.table") X <- as.data.frame(X)
+  if (missing(align)) align <- c("l", rep("r",ncol(X)))
   return(new("htmlTable",
              table=X,
              digits=digits,
+             align=align,
              colspan=colspan,
              htmlClass=class))
 }
@@ -49,7 +51,7 @@ htmlDownload <- function(link, text="Full results") {
 htmlTitle <- function(title, ...) {
   htmlText(paste0("<span class='content-title'>", title, "</span>"), ...)
 }
-htmlFrame <- function(x, colspan=1) {
-  txt <- paste0('<iframe width=100% src="', x, '"></iframe>')
+htmlFrame <- function(x, width='100%', height='480px', colspan=1) {
+  txt <- paste0('<iframe width=', width, ' height=', height, ' src="', x, '"></iframe>')
   htmlText(txt, colspan=colspan)
 }

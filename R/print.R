@@ -9,14 +9,15 @@ print.htmlTable <- function(X, name, file="", append=FALSE, include.rownames=TRU
     digits <- drop(matrix(c(0, X@digits), ncol=ncol(X@table)+1))
   }
   display <- xtable(X@table,digits=digits)
-  align(display) <- c("l",rep("r",ncol(X@table)))
   if (!append) {
     cat("---\nlayout: default\n---\n", file=file)
     append <- TRUE
   }
   if (missing(include.rownames) & class(X@table)[1] == "data.table") {
     include.rownames <- FALSE
-    align(display)[2] <- 'l'
+    align(display) <- c('l', X@align)
+  } else {
+    align(display) <- X@align
   }
   print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""),
         file=file, append=append, include.rownames=include.rownames, ...)
