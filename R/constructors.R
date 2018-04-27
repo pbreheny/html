@@ -42,14 +42,13 @@ htmlDownload <- function(link, text="Full results") {
   <div class="download">
     <svg-icon>
       <src href="img/sprite.svg#si-glyph-inbox-download"/>
-    </svg-icon>
-    Full results
+    </svg-icon>', text, '
   </div>
 </a>')
   htmlText(txt)
 }
 htmlTitle <- function(title, ...) {
-  htmlText(paste0("<span class='content-title'>", title, "</span>"), ...)
+  htmlText(paste0("<div class='content-title'>", title, "</div>"), ...)
 }
 htmlFrame <- function(x, width='100%', height='480px', colspan=1) {
   txt <- paste0('<iframe width=', width, ' height=', height, ' src="', x, '"></iframe>')
