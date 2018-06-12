@@ -1,9 +1,9 @@
 Package: html
 Title: Functions for creating HTML reports
-Version: 0.5
-Date: 2016-08-10
+Version: 0.6
+Date: 2018-06-12
 Author: Patrick Breheny
 Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>
-Depends: visreg, xtable
+Depends: visreg, knitr
 Description: Functions for creating HTML reports with a sidebar for navigation and some convenience report makers for standard univariate analyes, etc.
 License: GPL-2

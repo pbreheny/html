@@ -25,14 +25,13 @@ htmlList <- function(l) {
   }
   return(new("htmlList",list=l,n=n))
 }
-htmlCross <- function(x, margins=TRUE, digits=numeric(0), removeZeros=TRUE, sortTable={if (nrow(X)>2) TRUE else FALSE}) {
-  ## Add options: removeZeros=FALSE
+htmlCross <- function(x, margins=TRUE, digits=numeric(0), removeZeros=TRUE, sortTable={if (nrow(X)>2) TRUE else FALSE}, class="ctable") {
   X <- as.matrix(x)
   X <- X[apply(is.na(X),1,sum)==0,]
   if (is.matrix(digits)) digits <- as.numeric(digits)
   if (removeZeros) X <- X[apply(X,1,sum)!=0,]
   if (sortTable) X <- X[order(apply(X,1,sum),decreasing=TRUE),]
-  return(new("htmlCross",X=X,margins=margins,digits=digits))
+  return(new("htmlCross", X=X, margins=margins, digits=digits, htmlClass=class))
 }
 htmlFig <- function(x, width=480, height=480, colspan=1) {
   return(new("htmlFig", file=x, width=width, height=height, colspan=colspan))

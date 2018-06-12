@@ -1,26 +1,12 @@
-print.htmlTable <- function(X, name, file="", append=FALSE, include.rownames=TRUE, layout='default', ...) {
-  require(xtable)
+print.htmlTable <- function(obj, name, file="", append=FALSE, layout='default', ...) {
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
-  if (identical(X@digits, numeric(0))) {
-    digits <- NULL
-  } else if (length(X@digits)==1) {
-    digits <- c(0, rep(X@digits, ncol(X@table)))
-  } else {
-    digits <- drop(matrix(c(0, X@digits), ncol=ncol(X@table)+1))
-  }
-  display <- xtable(X@table,digits=digits)
   if (!append) {
     cat(paste0('---\nlayout: ', layout, '\n---\n'), file=file)
     append <- TRUE
   }
-  if (missing(include.rownames) & class(X@table)[1] == "data.table") {
-    include.rownames <- FALSE
-    align(display) <- c('l', X@align)
-  } else {
-    align(display) <- X@align
-  }
-  print(display, type="html", html.table.attributes=paste("class=",X@htmlClass,sep=""),
-        file=file, append=append, include.rownames=include.rownames, ...)
+  digits <- if(length(obj@digits)) obj@digits else getOption("digits")
+  cat(knitr::kable(obj@table, 'html', table.attr=paste0('class="', obj@htmlClass, '"'), digits=digits, ...),
+      file=file, append=append)
 }
 
 print.htmlList <- function(x, name, file="", append=FALSE, align="center", ncol, nrow, layout='default', ...) {
@@ -75,7 +61,6 @@ print.htmlText <- function(x, name, file="", append=FALSE, layout='default', ...
 }
 
 print.htmlCross <- function(obj, name, file="", append=FALSE, layout='default', ...) {
-  require(xtable)
   if (!missing(name)) file <- paste(.html$dir, name, ".html", sep="")
   X <- obj@X
   margins <- obj@margins
@@ -87,22 +72,16 @@ print.htmlCross <- function(obj, name, file="", append=FALSE, layout='default', 
     colnames(X)[ncol(X)] <- "Total"
     names(dimnames(X)) <- names(dn)
   }
-  digits <- if (identical(obj@digits,numeric(0))) NULL else drop(matrix(obj@digits,ncol=ncol(X)+1))
-  x <- xtable(X,digits=digits)
-  align(x) <- c("l",rep("r",ncol(x)))
-  x <- print(x, type="html", only.contents=TRUE, file=tempfile(), ...)
-  x <- gsub("<TR> <TH>", paste("<TR><TD style=\"vertical-align:middle\"rowspan=\"", length(dimnames(X)[[1]])+1, "\"><b>", names(dimnames(X))[1], "</b></TD> <TH>", sep=""),x)
-  for (i in 1:length(dimnames(X)[[1]])) {
-    x <- gsub(paste("<TR> <TD>", dimnames(X)[[1]][i],"</TD>"), paste("<TR> <TH>",dimnames(X)[[1]][i],"</TD>"),x,fixed=TRUE)
-  }
+  digits <- if(length(obj@digits)) obj@digits else getOption("digits")
+  x <- kable(X, 'html', table.attr=paste0('class="', obj@htmlClass, '"'), digits=digits, ...)
+  new <- paste0('  <tr>\n   <th></th>\n   <th colspan="', ncol(X), '" style="text-align:center;"> ', names(dimnames(X))[2], '</th>\n  </tr>\n')
+  x <- gsub('<thead>\n  <tr>', paste0('<thead>\n', new, '  <tr>'), x)
+  #x <- gsub("<TR> <TH>", paste("<TR><TD style=\"vertical-align:middle\"rowspan=\"", length(dimnames(X)[[1]])+1, "\"><b>", names(dimnames(X))[1], "</b></TD> <TH>", sep=""),x)
   if (!append) {
     cat(paste0('---\nlayout: ', layout, '\n---\n'), file=file)
     append <- TRUE
   }
-  cat("<TABLE class=\"ctable\">\n", file=file, append=append)
-  cat(paste("<TR><TD></TD><TD></TD><TD align=\"center\" colspan=", length(dimnames(X)[[2]]), "><b>", names(dimnames(X))[2],"</b></TD></TR>\n",sep=""), file=file, append=TRUE)
-  cat(x, file=file, append=TRUE)
-  cat("</TABLE>\n", file=file, append=TRUE)
+  cat(x, file=file, append=append)
 }
 
 print.htmlFig <- function(x, name, file="", append=FALSE, layout='default', ...) {

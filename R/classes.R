@@ -12,6 +12,7 @@ setClass("htmlFig", representation(file="character",
                                   colspan="numeric"))
 setClass("htmlCross", representation(X="matrix",
                                     digits="numeric",
+                                    htmlClass="character",
                                     margins="logical"))
 setClass("htmlList", representation(list="list",
                                    n="numeric"))
