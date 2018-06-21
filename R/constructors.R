@@ -39,9 +39,7 @@ htmlFig <- function(x, width=480, height=480, colspan=1) {
 htmlDownload <- function(link, text="Full results") {
   txt <- paste0('<a href="', link, '" download="">
   <div class="download">
-    <svg-icon>
-      <src href="img/sprite.svg#si-glyph-inbox-download"/>
-    </svg-icon>', text, '
+    <i class="fas fa-download"></i> ', text, '
   </div>
 </a>')
   htmlText(txt)

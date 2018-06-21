@@ -133,7 +133,11 @@ h3{
   padding-right: 10px;
   margin: auto;
 }
+.print_only, .hidden{
+    display:none;
+}
 
+/* ctable and tablesorter */
 .ctable {
   font: 12px/18px "Trebuchet MS",Trebuchet,Verdana,Sans-Serif;
   border-collapse:collapse;
@@ -154,22 +158,20 @@ h3{
   background-color: #2fa4e744;
 }
 .tablesorter-default .header,.tablesorter-default .tablesorter-header {
- background-image:url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
- background-position:center right;
- background-repeat:no-repeat;
- cursor:pointer;
- padding:4px 20px 4px 4px
+  background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+  background-position:center right;
+  background-repeat:no-repeat;
+  cursor:pointer;
+  padding:4px 20px 4px 4px
 }
 .tablesorter-default thead .headerSortUp,.tablesorter-default thead .tablesorter-headerAsc,.tablesorter-default thead .tablesorter-headerSortUp {
- background-image:url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+  background-image:url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
 }
 .tablesorter-default thead .headerSortDown,.tablesorter-default thead .tablesorter-headerDesc,.tablesorter-default thead .tablesorter-headerSortDown {
- background-image:url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+  background-image:url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
 }
 
-.print_only, .hidden{
-    display:none;
-}
+/* Download button */
 .download {
   background-color: #2fa4e7;
   border-color: #2fa4e7;
@@ -184,21 +186,22 @@ h3{
 }
 .download:hover {
   background-color: #fff;
-  color:#2fa4e7;
+  color: #2fa4e7;
+  fill: #fff
 }
-svg-icon svg {
-  height:16px;
+.download i {
+  margin-right: 10px;
 }
-.si-glyph-fill {
-  fill:#2fa4e7;
-}
-.download:hover .si-glyph-fill {
-  fill:#fff;
-}
+
+/* Other */
 iframe {
   border: none;
 }
 .subheading {
   font-size: 150%;
   font-weight: bold;
+}
+img {
+  display: block;
+  margin: 0px auto;
 }
