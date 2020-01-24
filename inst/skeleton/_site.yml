@@ -1,0 +1,21 @@
+author: "Patrick Breheny"
+navbar:
+  title: "Project title"
+  left:
+    - text: "Menu header"
+      menu:
+        - text: "Item A"
+          href: a.html
+        - text: "Item B"
+          href: b.html
+        - text: "Item C"
+          href: c.html
+    - text: "Item D"
+      href: d.html
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    theme: cerulean
+    css: _include/style.css
+    template: _include/template.html

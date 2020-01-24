@@ -1,0 +1,19 @@
+---
+title: Title
+author: '`r yaml::read_yaml("web/_site.yml")$author`'
+time: '`r format(Sys.time(), format="%Y-%m-%d %R")`'
+output:
+  html_document:
+    toc: false
+---
+
+```{r setup, include=FALSE, purl=FALSE}
+html::knitr_setup()
+```
+
+README of project here.
+
+A child document:
+
+```{r analysis, child = '_include/child.rmd'}
+```
