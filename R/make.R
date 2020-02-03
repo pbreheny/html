@@ -9,8 +9,11 @@ make <- function(complete=FALSE, purl=TRUE) {
   
   # If complete, clean existing output directories
   if (complete) {
-    if (dir.exists('web/_site')) file.remove('web/_site/*')
-    if (dir.exists('web/_R')) file.remove('web/_R/*')
+    if (dir.exists('web/_site')) {
+      unlink('web/_site', recursive=TRUE)
+      dir.create('web/_site')
+    }
+    if (dir.exists('web/_R')) file.remove(dir('web/_R', pattern='*', full.names=TRUE))
   }
   
   # Loop over input rmd files

@@ -13,9 +13,13 @@ render_html <- function(f, purl=TRUE) {
   ext <- tmp[2]
   
   if (purl) {
+    # Create purl directory if it does not exist
+    purl_dir <- paste0(base_dir, '/_R')
+    if (!dir.exists(purl_dir)) dir.create(purl_dir)
+    
     # Erase old R file
-    Rfile <- paste0(base_dir, '/_R/', handle, '.R')
-    system(paste("rm -f", Rfile))
+    Rfile <- paste0(purl_dir, '/', handle, '.R')
+    if (file.exists(Rfile)) file.remove(Rfile)
     knitr::purl(f, documentation=1L, output=Rfile)
     
     # Restyle R comments
