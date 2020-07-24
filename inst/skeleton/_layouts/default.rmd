@@ -1,0 +1,11 @@
+---
+title: {{title}}
+time: '`r format(Sys.time(), format="%Y-%m-%d %R")`'
+output:
+  html_document:
+    toc: false
+---
+
+This is some text.
+
+This is a function: `r toupper({{title}})`
