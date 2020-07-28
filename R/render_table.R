@@ -13,7 +13,7 @@ render_table <- function(Table, outDir = 'web', layout_dir = 'web/_layouts') {
   }
   if (!inherits(Table, 'data.frame')) stop('Table must be a data.frame-like object', call.=FALSE)
   if (!('ID' %in% names(Table))) stop('Table must contain a column called "ID"', call.=FALSE)
-  for (i in nrow(Table)) {
+  for (i in 1:nrow(Table)) {
     v <- as.list(Table[i,])
     out <- paste0(outDir, '/', Table$ID[i], '.rmd')
     x <- readLines(paste0(layout_dir, '/', v$layout, '.rmd'))
