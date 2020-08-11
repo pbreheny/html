@@ -19,12 +19,12 @@ render_html <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
   if (base_dir == '') base_dir <- '.'
   out_dir <- paste0(base_dir, ifelse(web, '/_site', ''))
   handle <- path[length(path)]
-  ext <- stringr::str_split(opt$file, '\\.')[[1]][2] %>% stringr::str_to_lower()
+  ext <- stringr::str_split(f, '\\.')[[1]][2] %>% stringr::str_to_lower()
   
-  if (opt$p) {
+  if (purl) {
     
     # Erase old R file
-    if (opt$w) {
+    if (web) {
       Rdir <- paste0(base_dir, '/_R')
       Rfile <- paste0(Rdir, '/', handle, '.R')
       if (!dir.exists(Rdir)) dir.create(Rdir)
