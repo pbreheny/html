@@ -4,12 +4,16 @@
 \alias{render_html}
 \title{Render an rmd file built within the html package template}
 \usage{
-render_html(f, purl = TRUE)
+render_html(f, web = FALSE, purl = FALSE, quiet = FALSE)
 }
 \arguments{
 \item{f}{File to render}
 
-\item{purl}{Deposit .R files in _R folder?  Default is true.}
+\item{web}{For website; assume a workflow in which \code{f="web/index.rmd"} and output to \verb{web/_site} and \verb{web/_R}}
+
+\item{purl}{Deposit .R files in _R folder?  Default is FALSE.}
+
+\item{quiet}{As in \code{rmarkdown::render()}; Default is FALSE.}
 }
 \description{
 Render an rmd file built within the html package template

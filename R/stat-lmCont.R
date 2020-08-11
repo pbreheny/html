@@ -1,7 +1,6 @@
 ## Linear regression vs. a continuous predictor (simple linear regression)
 lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y, tau=signif(sd(xxx),1),
                    log.x=FALSE, add.mean=FALSE) {
-  require(visreg)
   if (!missing(data)) {
     xx <- data[,x]
     yy <- data[,y]
@@ -57,7 +56,7 @@ lmCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=y
   ## Create visreg .png
   visfile <- paste0(.html$img, plotname,"-vis.png")
   png(paste0(.html$dir, visfile), 7, 7, "in", res=200)
-  visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=TRUE)
+  visreg::visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=TRUE)
   dev.off()
   L[[5]] <- htmlFig(visfile)
   return(htmlList(L))

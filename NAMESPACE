@@ -3,6 +3,7 @@
 export(download_button)
 export(knitr_setup)
 export(make)
+export(render_html)
 export(render_table)
 export(render_template)
 export(skeleton)

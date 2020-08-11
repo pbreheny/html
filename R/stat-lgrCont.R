@@ -1,7 +1,5 @@
 ## Logistic regression vs. a continuous predictor
-lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=paste("Pr(",y,")",sep=""), tau=signif(sd(xxx),1), log.x=FALSE, add.mean=FALSE)
-{
-  require(visreg)
+lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=paste("Pr(",y,")",sep=""), tau=signif(sd(xxx),1), log.x=FALSE, add.mean=FALSE) {
   if (!missing(data)) {
     xx <- data[,x]
     yy <- data[,y]
@@ -63,7 +61,7 @@ lgrCont <- function(x, y, data, plotname=x, reverse=FALSE, xlab.vis=x, ylab.vis=
   ## Create visreg .png
   visfile <- paste(plotname,"-vis.png",sep="")
   png(paste("html/compiled/",visfile,sep=""), 7, 7, "in", res=200)
-  visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=FALSE, scale="response", rug=2)
+  visreg::visreg(fit, xlab=xlab.vis, ylab=ylab.vis, partial=FALSE, scale="response", rug=2)
   dev.off()
   L[[6]] <- htmlFig(visfile)
   return(htmlList(L))

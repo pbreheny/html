@@ -1,6 +1,5 @@
 ## One-way ANOVA
 htmlANOVA <- function(x, y, Data, plotname=x, xlab=x, ylab=y, ...) {
-  require(visreg)
 
   if (!missing(Data)) {
     xx <- Data[,x]
@@ -22,7 +21,7 @@ htmlANOVA <- function(x, y, Data, plotname=x, xlab=x, ylab=y, ...) {
 
   visfile <- paste0(.html$img, plotname,"-vis.png")
   png(paste0(.html$dir, visfile), 5, 5, "in", res=200)
-  visreg(fit, "xxx", xlab=xlab, ylab=ylab, ...)
+  visreg::visreg(fit, "xxx", xlab=xlab, ylab=ylab, ...)
   mtext(formatP(p, label=TRUE), line=0.5)
   dev.off()
   htmlFig(visfile)
