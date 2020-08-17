@@ -12,9 +12,9 @@ render_html <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
   # Process input file location
   if (!file.exists(f)) stop("file '", f, "' does not exist!")
   path <- stringr::str_split(f, '\\.')[[1]] %>%
-    extract2(1) %>%
+    magrittr::extract2(1) %>%
     stringr::str_split('\\/') %>%
-    extract2(1)
+    magrittr::extract2(1)
   base_dir <- paste(path[-length(path)], collapse='/')
   if (base_dir == '') base_dir <- '.'
   out_dir <- paste0(base_dir, ifelse(web, '/_site', ''))

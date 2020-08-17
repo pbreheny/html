@@ -1,7 +1,7 @@
 Package: html
 Title: Functions for creating HTML reports
-Version: 1.5.0
-Date: 2020-08-11
+Version: 1.5.1
+Date: 2020-08-17
 Author: Patrick Breheny
 Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>
 Imports: knitr, rmarkdown, stringr, visreg, whisker
