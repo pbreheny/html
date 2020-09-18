@@ -1,6 +1,6 @@
 Package: html
 Title: Functions for creating HTML reports
-Version: 2.0.0
+Version: 2.1.0
 Date: 2020-09-18
 Author: Patrick Breheny
 Maintainer: Patrick Breheny <patrick-breheny@uiowa.edu>

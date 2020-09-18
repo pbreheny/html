@@ -16,7 +16,6 @@ rstring <- function(n=1, length=20, include.extra=FALSE, include.num=FALSE) {
   val
 }
 
-#' @export
 .link <- function() {
   if (file.exists('.link')) stop('.link file already exists')
   cat(paste0("http://myweb.uiowa.edu/pbreheny/clb/", rstring(1), "/index.html\n"), file=".link")
