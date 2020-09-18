@@ -1,5 +1,7 @@
 #' html: Functions for creating HTML reports
 #'
+#' Very much a work in progress.
+#'
 #' @docType package
 #'
 #' @import stats

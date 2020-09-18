@@ -4,3 +4,6 @@
 \name{html}
 \alias{html}
 \title{html: Functions for creating HTML reports}
+\description{
+Very much a work in progress.
+}

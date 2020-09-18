@@ -1,3 +1,3 @@
 if (requireNamespace("tinytest", quietly=TRUE)) {
-  tinytest::test_package(pattern="^[^_].*\\.[rR]$")
+  tinytest::test_package('html', pattern="^[^_].*\\.[rR]$")
 }

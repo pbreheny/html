@@ -1,5 +1,8 @@
 #' Make a groovy download button
 #'
+#' @param link   Where the button points
+#' @param text   What the button says
+#' 
 #' @export
 
 download_button <- function(link, text="Full results") {

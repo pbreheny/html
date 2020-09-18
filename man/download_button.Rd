@@ -6,6 +6,11 @@
 \usage{
 download_button(link, text = "Full results")
 }
+\arguments{
+\item{link}{Where the button points}
+
+\item{text}{What the button says}
+}
 \description{
 Make a groovy download button
 }
