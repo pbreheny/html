@@ -34,3 +34,8 @@ This is basically just a wrapper to `render_html`, but with some options set dif
 
 ## GitHub pages
 
+To push the web directory to GitHub Pages (assuming you're in a GitHub repo already):
+
+```r
+gh_pages('_site')
+```
