@@ -7,7 +7,7 @@
 #' 
 #' @export
 
-render_html <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
+render_page <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
 
   # Process input file location
   if (!file.exists(f)) stop("file '", f, "' does not exist!")
