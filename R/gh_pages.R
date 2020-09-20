@@ -14,7 +14,8 @@ gh_pages <- function(dir) {
     magrittr::extract2(1) %>%
     magrittr::extract2(2)
   sha <- system('git rev-parse HEAD', intern=TRUE)[1] %>% stringr::str_sub(1, 7)
-  setwd(dir)
+  orig <- setwd(dir)
+  on.exit(setwd(orig))
   system('git init')
   system('git add .')
   system(paste0('git commit -m "Master build: ', sha, '"'))
