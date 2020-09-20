@@ -7,7 +7,7 @@ In development.
 ## Install
 
 ```r
-remotes::install_github("pbreheny/visreg")
+remotes::install_github("pbreheny/html")
 ```
 
 ## Rendering
