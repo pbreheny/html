@@ -20,13 +20,19 @@ gh_pages <- function(dir, files) {
     tmp <- tempdir()
     system(paste('git clone', origin, tmp))
     for (f in files) file.copy(paste0(dir, '/', f), paste0(tmp, '/', f), overwrite=TRUE)
-    dir <- tmp
+    orig <- setwd(tmp)
+    on.exit(setwd(orig))
+    system('git checkout gh-pages')
+    system('git add .')
+    system(paste0('git commit -m "Updating ', files[1], '"'))
+    cmd = paste0('git push')
+  } else {
+    orig <- setwd(dir)
+    on.exit(setwd(orig))
+    system('git init')
+    system('git add .')
+    system(paste0('git commit -m "Master build: ', sha, '"'))
+    cmd = paste0('git push --force --quiet ', origin, ' master:gh-pages')
   }
-  orig <- setwd(dir)
-  on.exit(setwd(orig))
-  system('git init')
-  system('git add .')
-  system(paste0('git commit -m "Master build: ', sha, '"'))
-  cmd = paste0('git push --force --quiet ', origin, ' master:gh-pages')
   system(cmd)
 }
