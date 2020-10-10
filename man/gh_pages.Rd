@@ -4,10 +4,14 @@
 \alias{gh_pages}
 \title{Push a flat repository to the GitHub pages branch}
 \usage{
-gh_pages(dir)
+gh_pages(dir, files, flatten = FALSE)
 }
 \arguments{
-\item{dir}{The subdirectory contaiing the web materials to be pushed to \code{gh-pages}}
+\item{dir}{The subdirectory containing the web materials to be pushed to \code{gh-pages}}
+
+\item{files}{Optional: a vector of filenames, in the case of a partial push.}
+
+\item{flatten}{Delete git history; this is desirable for the gh-pages branch since its history is irrelevant, but super-dangerous if you specify the wrong directory, so be very careful with this.  Turned off by default.}
 }
 \description{
 Assumes you are in the project home (the one with the \code{.git} directory), and that a subdirectory contains the web materials.
