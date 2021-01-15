@@ -55,5 +55,7 @@ render_page <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
       cat(rlines, file=Rfile, sep='\n')
     }
   }
-  rmarkdown::render(f, output_dir=out_dir, knit_root_dir=getwd(), quiet=quiet, envir=new.env(parent=.GlobalEnv))
+  out <- catchWarning(rmarkdown::render(f, output_dir=out_dir, knit_root_dir=getwd(), quiet=quiet, envir=new.env(parent=.GlobalEnv)))
+  skip <- stringr::str_detect(as.character(out$warning), "MathJax doesn't work with self_contained")
+  if (length(out$warning[!skip])) warning(out$warning[!skip])
 }
