@@ -10,6 +10,14 @@ In development.
 remotes::install_github("pbreheny/html")
 ```
 
+## Initial setup
+
+To create a folder called `web` with default files in correct directory structure an a sample file called `index.rmd`:
+
+```r
+html::skeleton()
+```
+
 ## Rendering
 
 By render, I mean turn `rmd` into `html`.  To render a single file:
