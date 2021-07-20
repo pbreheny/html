@@ -18,4 +18,5 @@ output:
     toc_float: true
     theme: cerulean
     css: _include/style.css
-    template: _include/template.html
+    includes:
+      after_body: _include/footer.html
