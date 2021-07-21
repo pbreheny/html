@@ -12,5 +12,5 @@ download_button(link, text = "Full results")
 \item{text}{What the button says}
 }
 \description{
-Make a groovy download button
+Must enable font awesome to get the icon; this is set up by default in \code{\link[=knitr_setup]{knitr_setup()}}.
 }

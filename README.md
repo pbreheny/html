@@ -1,4 +1,4 @@
-[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.1.6&color=blue&logo=github)](https://github.com/pbreheny/html)
+[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.2.0&color=blue&logo=github)](https://github.com/pbreheny/html)
 
 # Some helper functions for html page rendering
 
@@ -16,7 +16,7 @@ To create a folder called `web` with default files in correct directory structur
 
 ```r
 html::skeleton()
-html::render_page('web/index.rmd')
+html::render_page('web/index.rmd', web=TRUE)
 ```
 
 ## Rendering

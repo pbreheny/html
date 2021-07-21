@@ -1,5 +1,7 @@
 #' Make a groovy download button
 #'
+#' Must enable font awesome to get the icon; this is set up by default in [knitr_setup()].
+#' 
 #' @param link   Where the button points
 #' @param text   What the button says
 #' 

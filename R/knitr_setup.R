@@ -11,4 +11,5 @@ knitr_setup <- function() {
   knitr::knit_hooks$set(small.mar = function(before, options, envir) {
     if (before) par(mar = c(4, 4, .1, .1))
   })
+  htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 }

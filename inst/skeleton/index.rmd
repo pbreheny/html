@@ -17,3 +17,10 @@ A child document:
 
 ```{r analysis, child = '_include/child.rmd'}
 ```
+
+A fancy download button:
+
+```{r download}
+html::download_button('https://github.com/pbreheny/html/archive/refs/heads/master.zip', 'Download me')
+```
+
