@@ -11,16 +11,11 @@ render_page <- function(f, web=FALSE, purl=FALSE, quiet=FALSE) {
 
   # Process input file location
   if (!file.exists(f)) stop("file '", f, "' does not exist!")
-  path <- stringr::str_split(f, '\\.')[[1]] %>%
-    magrittr::extract2(1) %>%
-    stringr::str_split('\\/') %>%
-    magrittr::extract2(1)
-  base_dir <- paste(path[-length(path)], collapse='/')
-  if (base_dir == '') base_dir <- '.'
+  ext <- tools::file_ext(f)
+  base_dir <- dirname(f)
   out_dir <- paste0(base_dir, ifelse(web, '/_site', ''))
-  handle <- path[length(path)]
-  ext <- stringr::str_split(f, '\\.')[[1]][2] %>% stringr::str_to_lower()
-  
+  handle <- tools::file_path_sans_ext(basename(f))
+
   if (purl) {
     
     # Erase old R file
