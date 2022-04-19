@@ -1,4 +1,4 @@
-[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.2.1&color=blue&logo=github)](https://github.com/pbreheny/html)
+[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.3.0&color=blue&logo=github)](https://github.com/pbreheny/html)
 
 # Some helper functions for html page rendering
 

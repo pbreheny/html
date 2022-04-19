@@ -4,16 +4,16 @@
 \alias{render_page}
 \title{Render an rmd file built within the html package template}
 \usage{
-render_page(f, web = FALSE, purl = FALSE, quiet = FALSE)
+render_page(f, purl = FALSE, quiet = FALSE, force = FALSE)
 }
 \arguments{
-\item{f}{File to render}
+\item{f}{File to render (character)}
 
-\item{web}{For website; assume a workflow in which \code{f="web/index.rmd"} and output to \verb{web/_site} and \verb{web/_R}}
+\item{purl}{Deposit .r files in _r folder? (default: \code{FALSE})}
 
-\item{purl}{Deposit .R files in _R folder?  Default is FALSE.}
+\item{quiet}{As in \code{rmarkdown::render()}. (default: \code{FALSE})}
 
-\item{quiet}{As in \code{rmarkdown::render()}; Default is FALSE.}
+\item{force}{By default, \code{render_page()} requires the folders \code{docs} or \code{web} to exist if multiple \code{.html} files are present. To override this behavior and force rendering, set \code{force=TRUE}.}
 }
 \description{
 Render an rmd file built within the html package template

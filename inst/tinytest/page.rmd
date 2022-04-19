@@ -1,0 +1,18 @@
+---
+title: Title
+author: Author
+time: '`r format(Sys.time(), format="%Y-%m-%d %R")`'
+output: html_document
+---
+
+```{r setup, include=FALSE, purl=FALSE}
+html::knitr_setup()
+```
+
+This is a simple page.
+
+With a simple download button:
+
+```{r download}
+html::download_button('https://github.com/pbreheny/html/archive/refs/heads/master.zip', 'Download me')
+```

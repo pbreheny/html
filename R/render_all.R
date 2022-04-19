@@ -11,6 +11,6 @@ render_all <- function(files=list.files('web', '*.rmd', full.names=TRUE), clean=
   if (dir.exists('web/_site')) unlink('web/_site', recursive=TRUE)
   for (f in files) {
     cat('Knitting ', f, '...\n', sep='')
-    render_page(f, web=TRUE, purl=purl, quiet=quiet)
+    render_page(f, purl=purl, quiet=quiet, force=TRUE)
   }
 }
