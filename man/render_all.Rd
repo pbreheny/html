@@ -4,21 +4,14 @@
 \alias{render_all}
 \title{Render all rmd files in the \code{web} directory}
 \usage{
-render_all(
-  files = list.files("web", "*.rmd", full.names = TRUE),
-  clean = TRUE,
-  purl = TRUE,
-  quiet = TRUE
-)
+render_all(files, quiet = TRUE, ...)
 }
 \arguments{
-\item{files}{Files to knit; default: web/*.rmd}
-
-\item{clean}{Remove old files?  Default is TRUE.}
-
-\item{purl}{Deposit .R files in _R folder?  Default is TRUE.}
+\item{files}{Files to render (default: \verb{web/*.rmd} if \code{web} folder exists, otherwise \verb{*.rmd})}
 
 \item{quiet}{As in \code{rmarkdown::render()}; Default is TRUE.}
+
+\item{...}{Further arguments to \code{render_page()}}
 }
 \description{
 Render all rmd files in the \code{web} directory

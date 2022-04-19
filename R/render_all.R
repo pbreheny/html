@@ -1,16 +1,22 @@
 #' Render all rmd files in the `web` directory
 #' 
-#' @param files    Files to knit; default: web/*.rmd
-#' @param clean    Remove old files?  Default is TRUE.
-#' @param purl     Deposit .R files in _R folder?  Default is TRUE.
+#' @param files    Files to render (default: `web/*.rmd` if `web` folder exists, otherwise `*.rmd`)
 #' @param quiet    As in `rmarkdown::render()`; Default is TRUE.
+#' @param ...      Further arguments to `render_page()`
 #' 
 #' @export
 
-render_all <- function(files=list.files('web', '*.rmd', full.names=TRUE), clean=TRUE, purl=TRUE, quiet=TRUE) {
-  if (dir.exists('web/_site')) unlink('web/_site', recursive=TRUE)
+render_all <- function(files, quiet=TRUE, ...) {
+  if (missing(files)) {
+    if (dir.exists('web')) {
+      files <- list.files('web', '*.rmd', full.names=TRUE, ignore.case=TRUE)
+      if (dir.exists('web/_site')) unlink('web/_site', recursive=TRUE)
+    } else {
+      files <- list.files(pattern='*.rmd', full.names=TRUE, ignore.case=TRUE)
+    }
+  }
   for (f in files) {
     cat('Knitting ', f, '...\n', sep='')
-    render_page(f, purl=purl, quiet=quiet, force=TRUE)
+    render_page(f, quiet=quiet, ...)
   }
 }
