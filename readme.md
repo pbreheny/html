@@ -2,7 +2,7 @@
 
 # Some helper functions for html page rendering
 
-In development.
+In development!
 
 ## Install
 
@@ -10,41 +10,42 @@ In development.
 remotes::install_github("pbreheny/html")
 ```
 
-## Initial setup / test
+## Overview
 
-To create a folder called `web` with default files in correct directory structure an a sample file called `index.rmd`, then render that file into an html document:
+The purpose of the **html** package is to provide a convenient method for rendering Rmarkdown files into html (turning `a.rmd` into `a.html`). The underlying rendering is done by the **[rmarkdown](https://cran.r-project.org/package=rmarkdown)** package, but **html** handles input/output directories and provides some convienent add-ons.
 
-```r
-html::skeleton()
-html::render_page('web/index.rmd', web=TRUE)
-```
+The package is set up for three specific use cases:
 
-## Rendering
-
-By render, I mean turn `rmd` into `html`.  To render a single file:
+1. Single `.rmd` file: For simple projects that consist of a single Rmarkdown file,
 
 ```r
 html::render_page('page.rmd')
 ```
 
-By default, this creates `page.html` in the same directory as `page.rmd`.  If you are publishing to a website, typically you want all the html files in their own directory, which I tend to call `_site` for Jekyll-compatibility.  For this, specify `web=TRUE`:
+This creates `page.html` in the same directory as `page.rmd`. If there are multiple `.rmd` files in the same directory, it quickly becomes very disorganized to have both `.rmd` pages and `.html` pages in the same directory, so `render_page()` will throw an error in these situations. This can be turned off with `force=TRUE`.
+
+2. GitHub pages: GitHub pages expects that html documents are located in a directory called `docs`. If this directory exists, then the rendered `.html` file appears there instead:
 
 ```r
-html::render_page('page.rmd', web=TRUE)
+html::render_page('page.rmd')
 ```
+
+This creates the file `/docs/page.html` if the `docs` folder exists.
+
+3. Jekyll: The expectation here is that the `.rmd` files are in a folder called `web` and the rendered html will appear in a folder called `web/_site`, which will then be hosted locally or by some service provider:
+
+```r
+html::render_page('web/page.rmd')
+```
+
+This creates the file `web/_site/page.html`. Note that in this case, the `.rmd` file is located in a `web` subdirectory, but all code (both the call to `render_page()` and all code in the `.rmd` file) is run from the project's root directory.
+
+## Batch usage
 
 To render a bunch of files:
 
 ```r
-html::render_all(list.files(".", "*.rmd"))'
+html::render_all()
 ```
 
-This is basically just a wrapper to `render_page`, but with some options set differently (quieter output, `web=TRUE` by default).
-
-## GitHub pages
-
-To push the web directory to GitHub Pages (assuming you're in a GitHub repo already):
-
-```r
-gh_pages('_site')
-```
+If a `web` directory exists, this renders all the `.rmd` files in it; otherwise all the files in the project root. One can also supply a list of files to render. This is essentially a wrapper to `render_page`, but with quieter output.
