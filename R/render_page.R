@@ -70,4 +70,7 @@ render_page <- function(f, purl=FALSE, quiet=FALSE, force=FALSE) {
   skip <- stringr::str_detect(as.character(out$warning), "MathJax doesn't work with self_contained")
   if (length(out$warning[!skip])) warning(out$warning[!skip])
   if (inherits(out$value, 'error')) stop(out$value$message)
+  
+  # Return output location invisible
+  invisible(paste0(out_dir, '/', handle, '.html'))
 }
