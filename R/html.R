@@ -1,6 +1,4 @@
-#' html: Functions for creating HTML reports
-#'
-#' Very much a work in progress.
+#' html: Support for rendering rmd to html
 #'
 #' @docType package
 #'
