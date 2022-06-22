@@ -3,7 +3,4 @@
 \docType{package}
 \name{html}
 \alias{html}
-\title{html: Functions for creating HTML reports}
-\description{
-Very much a work in progress.
-}
+\title{html: Support for rendering rmd to html}

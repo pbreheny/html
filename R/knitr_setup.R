@@ -1,5 +1,12 @@
 #' Setup script to be called at beginning of rmarkdown files
 #' 
+#' Loads knitr, kableExtra, font awesome, sets an RNG seed, and sets several
+#' convenient knitr options:
+#'   * Aliases for h (fig.height) and w (fig.width)
+#'   * Turns on fig.align="center", message=FALSE, etc., almost always what one
+#'     wants if writing a report (as opposed to an R instructional document)
+#'   * Sets smaller figure margins
+#' 
 #' @export
 
 knitr_setup <- function() {

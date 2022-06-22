@@ -1,8 +1,6 @@
-[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.3.0.1&color=blue&logo=github)](https://github.com/pbreheny/html)
+[![GitHub version](https://img.shields.io/static/v1?label=GitHub&message=2.4.0&color=blue&logo=github)](https://github.com/pbreheny/html)
 
-# Some helper functions for html page rendering
-
-In development!
+# Helper/convenience functions for rmd -> html rendering
 
 ## Install
 
@@ -12,7 +10,14 @@ remotes::install_github("pbreheny/html")
 
 ## Overview
 
-The purpose of the **html** package is to provide a convenient method for rendering Rmarkdown files into html (turning `a.rmd` into `a.html`). The underlying rendering is done by the **[rmarkdown](https://cran.r-project.org/package=rmarkdown)** package, but **html** handles input/output directories and provides some convienent add-ons.
+The **html** package has two purposes:
+
+* To provide simple, command-line-friendly methods for rendering Rmarkdown files into html (turning `a.rmd` into `a.html`)
+* To provide convenience functions for setting up things like footers, icons, buttons, etc.
+
+The underlying rendering is done by the **[rmarkdown](https://cran.r-project.org/package=rmarkdown)** package, but **html** handles input/output directories in a sensible way (at least, in a way that I find sensible) such that it can simply be called with a single argument (the file to render) from the package root and everything will be taken care of automatically.
+
+## Rendering
 
 The package is set up for three specific use cases:
 
@@ -48,4 +53,4 @@ To render a bunch of files:
 html::render_all()
 ```
 
-If a `web` directory exists, this renders all the `.rmd` files in it; otherwise all the files in the project root. One can also supply a list of files to render. This is essentially a wrapper to `render_page`, but with quieter output.
+If a `web` directory exists, this renders all the `.rmd` files in it; otherwise it renders all the files in the project root. One can also supply a list of files to render. This is essentially a wrapper to `render_page`, but (a) with quieter output and (b) by default, cleans out old `.html` files from the destination before repopulating it.

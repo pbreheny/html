@@ -7,5 +7,12 @@
 knitr_setup()
 }
 \description{
-Setup script to be called at beginning of rmarkdown files
+Loads knitr, kableExtra, font awesome, sets an RNG seed, and sets several
+convenient knitr options:
+\itemize{
+\item Aliases for h (fig.height) and w (fig.width)
+\item Turns on fig.align="center", message=FALSE, etc., almost always what one
+wants if writing a report (as opposed to an R instructional document)
+\item Sets smaller figure margins
+}
 }
