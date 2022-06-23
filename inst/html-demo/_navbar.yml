@@ -1,0 +1,12 @@
+title: "Project title"
+left:
+  - text: "Menu header"
+    menu:
+      - text: "Item A"
+        href: a.html
+      - text: "Item B"
+        href: b.html
+      - text: "Item C"
+        href: c.html
+  - text: "Item D"
+    href: d.html

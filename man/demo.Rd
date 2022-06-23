@@ -4,11 +4,9 @@
 \alias{demo}
 \title{Creates a demo folder for illustrating the usage of the package}
 \usage{
-demo(dir = "html-demo", jekyll = FALSE)
+demo(jekyll = FALSE)
 }
 \arguments{
-\item{dir}{Name of directory (default: html-demo)}
-
 \item{jekyll}{Set up in jekyll format (as opposed to \code{docs})? (default: FALSE)}
 }
 \description{

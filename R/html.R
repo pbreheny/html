@@ -1,5 +1,7 @@
 #' html: Support for rendering rmd to html
 #'
+#' See [package website](https://pbreheny.github.io/html/) for details.
+#'
 #' @docType package
 #'
 #' @import stats
