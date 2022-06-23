@@ -2,6 +2,7 @@
 
 export(demo)
 export(download_button)
+export(include_css)
 export(include_setup)
 export(knitr_setup)
 export(render_all)

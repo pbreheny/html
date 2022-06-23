@@ -1,6 +1,5 @@
 #' Creates a demo folder for illustrating the usage of the package
 #'
-#' @param dir     Name of directory (default: html-demo)
 #' @param jekyll  Set up in jekyll format (as opposed to `docs`)? (default: FALSE)
 #'
 #' @examples
@@ -10,15 +9,13 @@
 #'
 #' @export
 
-demo <- function(dir='html-demo', jekyll=FALSE) {
-  if (dir.exists(dir)) stop(paste0('Exiting; directory ', dir, ' already exists.'), call.=FALSE)
-  if (dir.exists('__demo')) stop(paste0('Exiting; directory __demo already exists.'), call.=FALSE)
+demo <- function(jekyll=FALSE) {
+  if (dir.exists('html-demo')) stop(paste0('Exiting; directory "html-demo" already exists.'), call.=FALSE)
   path <- system.file(package="html")
-  file.copy(paste0(path, "/demo"), "__demo", recursive=TRUE)
+  file.copy(paste0(path, "/html-demo"), '.', recursive=TRUE)
   if (jekyll) {
-    dir.create('__demo/web')
+    dir.create('html-demo/web')
   } else {
-    dir.create('__demo/docs')
+    dir.create('html-demo/docs')
   }
-  invisible(file.rename("__demo", dir))
 }

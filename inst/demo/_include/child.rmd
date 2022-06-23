@@ -1,5 +1,0 @@
-Shared rmd code goes here
-
-```{r chunk}
-1+1
-```

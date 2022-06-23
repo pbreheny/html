@@ -4,3 +4,6 @@
 \name{html}
 \alias{html}
 \title{html: Support for rendering rmd to html}
+\description{
+See \href{https://pbreheny.github.io/html/}{package website} for details.
+}
