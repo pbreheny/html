@@ -19,6 +19,8 @@ render_page <- function(f, purl=FALSE, quiet=FALSE, force=FALSE) {
   if (base_dir == 'web') {
     out_dir <- paste0(base_dir, '/_site')
     if (!dir.exists(out_dir)) dir.create(out_dir)
+  } else if (dir.exists(paste0(base_dir, '/_site'))) {
+    out_dir <- paste0(base_dir, '/_site')
   } else if (dir.exists(paste0(base_dir, '/docs'))) {
     out_dir <- paste0(base_dir, '/docs')
   } else if (length(list.files(base_dir, '*.rmd', ignore.case=TRUE)) > 1 && force == FALSE) {
