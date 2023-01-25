@@ -6,10 +6,12 @@
 #'   * Turns on fig.align="center", message=FALSE, etc., almost always what one
 #'     wants if writing a report (as opposed to an R instructional document)
 #'   * Sets smaller figure margins
+#'   
+#' @param fa   Load font awesome? (default: TRUE)
 #' 
 #' @export
 
-knitr_setup <- function() {
+knitr_setup <- function(fa=TRUE) {
   do.call('library', list(package='knitr'))
   do.call('library', list(package='kableExtra'))
   set.seed(1)
@@ -18,5 +20,5 @@ knitr_setup <- function() {
   knitr::knit_hooks$set(small.mar = function(before, options, envir) {
     if (before) par(mar = c(4, 4, .1, .1))
   })
-  htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+  if (fa) htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 }
