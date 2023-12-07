@@ -24,7 +24,7 @@ render_page <- function(f, purl=FALSE, quiet=FALSE, force=FALSE) {
   } else if (dir.exists(paste0(base_dir, '/docs'))) {
     out_dir <- paste0(base_dir, '/docs')
   } else if (length(list.files(base_dir, '*.rmd', ignore.case=TRUE)) > 1 && force == FALSE) {
-    stop('No!', call. = FALSE)
+    stop('Multiple rmd files present and no output directory specified.\nRun with force=TRUE if this is intentional.', call. = FALSE)
   } else {
     out_dir <- base_dir
   }
@@ -63,6 +63,15 @@ render_page <- function(f, purl=FALSE, quiet=FALSE, force=FALSE) {
     while (x[length(x)] == '') x <- x[-length(x)]
     redundant <- c(FALSE, x[-length(x)] == x[-1] & x[-length(x)] == '')
     cat(x[!redundant], file=Rfile, sep='\n')
+  } else {
+    tmp <- tempfile()
+    knitr::purl(f, output=tmp, quiet=TRUE)
+    rlines <- readLines(tmp)
+  }
+
+  # Warn if browser() code is present
+  if (any(stringr::str_detect(rlines, 'browser\\(\\)'))) {
+    warning('Call to browser() detected in code; may cause rendering problems.', call.=FALSE)
   }
   
   # update footer if applicable
