@@ -4,7 +4,10 @@
 \alias{knitr_setup}
 \title{Setup script to be called at beginning of rmarkdown files}
 \usage{
-knitr_setup()
+knitr_setup(fa = TRUE)
+}
+\arguments{
+\item{fa}{Load font awesome? (default: TRUE)}
 }
 \description{
 Loads knitr, kableExtra, font awesome, sets an RNG seed, and sets several

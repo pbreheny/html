@@ -4,12 +4,17 @@
 \alias{render_page}
 \title{Render an rmd file built within the html package template}
 \usage{
-render_page(f, purl = FALSE, quiet = FALSE, force = FALSE)
+render_page(
+  f,
+  purl = c("none", "basic", "fancy"),
+  quiet = FALSE,
+  force = FALSE
+)
 }
 \arguments{
 \item{f}{File to render (character)}
 
-\item{purl}{Deposit .r files in _r folder? (default: \code{FALSE})}
+\item{purl}{Creates .r file if set to \code{"basic"} or \code{"fancy"}. (default: \code{"none"})}
 
 \item{quiet}{As in \code{rmarkdown::render()}. (default: \code{FALSE})}
 
