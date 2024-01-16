@@ -2,6 +2,7 @@
 % Please edit documentation in R/html.R
 \docType{package}
 \name{html}
+\alias{html-package}
 \alias{html}
 \title{html: Support for rendering rmd to html}
 \description{

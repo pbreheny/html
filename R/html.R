@@ -2,13 +2,12 @@
 #'
 #' See [package website](https://pbreheny.github.io/html/) for details.
 #'
-#' @docType package
-#'
+#' @name html
+"_PACKAGE"
+
 #' @import stats
 #' @import graphics
 #' @import grDevices
 #' @import utils
 #' @importFrom magrittr %>%
-#'
-#' @name html
 NULL
