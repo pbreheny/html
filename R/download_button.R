@@ -13,6 +13,8 @@ download_button <- function(link, text="Full results") {
 <div class="download">
 <i class="fas fa-download"></i> ', text, '
 </div>
-</a>'), class='html')
+</a>'), class='raw_html')
 }
-print.html <- function(x) cat(x)
+
+#' @export
+print.raw_html <- function(x, ...) cat(x)

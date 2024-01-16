@@ -30,6 +30,8 @@ render_page <- function(f, purl=c('none', 'basic', 'fancy'), quiet=FALSE, force=
     out_dir <- base_dir
   }
 
+  # Purl
+  knitr::opts_knit$set(root.dir = getwd())
   if (purl != 'none') {
     
     # Set destination
